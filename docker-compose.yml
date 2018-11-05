@@ -1,0 +1,47 @@
+version: '3.1'
+
+volumes:
+  db:
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/mysql_root_password
+      - MYSQL_PASSWORD=/run/secrets/mysql_password
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+    ports:
+      - 3306:3306
+    secrets:
+      - mysql_root_password
+      - mysql_password
+
+  app:
+    image: nextcloud
+    ports:
+      - 8080:80
+    volumes:
+      - ./app:/var/www/html
+    restart: always
+    environment:
+      - NEXTCLOUD_TRUSTED_DOMAINS=cloud.schafsbau.de
+
+  caddy:
+    image: abiosoft/caddy
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./caddy/Caddyfile:/etc/Caddyfile
+      - ./caddy/.caddy:/root/.caddy
+
+secrets:
+  mysql_root_password:
+    file: ./secrets/mysql_root_password.txt
+  mysql_password:
+    file: ./secrets/mysql_password.txt
