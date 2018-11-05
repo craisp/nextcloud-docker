@@ -11,7 +11,7 @@ services:
       - db:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/mysql_root_password
-      - MYSQL_PASSWORD=/run/secrets/mysql_password
+      - MYSQL_PASSWORD_FILE=/run/secrets/mysql_password
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
     ports:
