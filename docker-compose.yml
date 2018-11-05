@@ -28,7 +28,7 @@ services:
       - ./app:/var/www/html
     restart: always
     environment:
-      - NEXTCLOUD_TRUSTED_DOMAINS=cloud.schafsbau.de
+      - NEXTCLOUD_TRUSTED_DOMAINS=<yourdomain.tld>
 
   caddy:
     image: abiosoft/caddy

@@ -1,4 +1,4 @@
-cloud.schafsbau.de {
+<yourdomain.tld> {
   header / {
     # Enable HTTP Strict Transport Security (HSTS) to force clients to always
     # connect via HTTPS (do not use if only testing)
@@ -18,4 +18,3 @@ cloud.schafsbau.de {
     transparent
   }
 }
-
